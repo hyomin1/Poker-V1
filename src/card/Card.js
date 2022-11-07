@@ -5,24 +5,25 @@ import './Animation.css';
 const Card = (props) => {
 
     const [data,setData] = useState();
-    const Inform = () => {
-        //useEffect로 지정시 실행시 자동 요청  , 버튼으로 하고싶으면 버튼 내에서 onClick으로 호출?
-        //서버에서 들어오는 값(랜덤값) data.card1 data.card2
-        useEffect(()=> {
-            axios.get('https://jsonplaceholder.typicode.com/todos/1')  //주소는 설정해줘야함
-                .then(response => {
-                    setData(response.data);
-                })
-                .catch(error => {
-                    alert("실패");
-                })
-        },[]);
+    const receiveData = ()=>{   //서버에 데이터 요청
+        axios.get('https://jsonplaceholder.typicode.com/todos/1').then((reponse) => {
+            setData(reponse.data);
+        });
     }
+    //입력한 2개의 데이터 서버에 요청(등록)
+    const sendData = () => {
+        axios.post('https://jsonplaceholder.typicode.com/todos/1', {
+            cardNumber
+        }).then(response => {
+            console.log(response)
+        })
+    }
+
     const handleclickRandom1 = (e) =>{
-        document.getElementById("img1").src = images[data.player.card1].src; //배열 인덱스 변경
+        document.getElementById("img1").src = images[data.id].src; //배열 인덱스 변경
     }
     const handleclickRandom2 = (e) => {
-        document.getElementById("img1").src = images[data.player.card2].src; //배열 인덱스 변경
+        document.getElementById("img2").src = images[data.id].src; //배열 인덱스 변경
     }
     const {images,setImages} = props;
     //카드 번호 입력후 요청 관련 함수들
@@ -30,8 +31,7 @@ const Card = (props) => {
         card1:"",
         card2:"",
     });
-
-    const handleClick1 = (e) => {   //내가 입력한 카드숫자 뒤집는것
+    const handleClick1 = (e) => {   //내가 입력한 카드숫자 뒤집는것 ,잠깐 랜덤확인을 위해 변수 변경
         document.getElementById("img1").src = images[cardNumber.card1].src;
     }
     const handleClick2 = (e) => {  //내가 입력한 카드숫자 뒤집는것
@@ -42,8 +42,6 @@ const Card = (props) => {
             ...cardNumber,[e.target.name] : e.target.value,
         })
     }
-    //입력한 2개의 데이터 서버에 요청(등록)
-
         return (
             <div>
                 <div className="container">
@@ -56,10 +54,15 @@ const Card = (props) => {
                         }/>
                     </div>
                     <div className="reverse" >
-                        <button onClick={()=> {  //하나의 버튼에 2개의 이벤트
+                        <button onClick={()=> {
+                            receiveData()
+                            //하나의 버튼에 2개의 이벤트
+                        }}>랜덤 값 요청</button>
+                        <button onClick={()=> {
+                            console.log(data) //받아온 데이터 확인
                             handleclickRandom1()
                             handleclickRandom2()
-                        }}>랜덤 값 요청</button>
+                        }}>카드 뒤집기</button>
                     </div>
                     <div className="inform">
                         <input
@@ -79,8 +82,13 @@ const Card = (props) => {
                         <button onClick={()=> {  // 서버 요청 예시
                             console.log(cardNumber.card1)
                             console.log(cardNumber.card2)
-                            console.log(data.id)
-                        }}>요청</button>
+                            sendData()
+                        }}>전달</button>
+
+                        <button onClick={()=> {
+                            handleClick1()
+                            handleClick2()
+                        }}>카드 뒤집기</button>
                     </div>
                 </div>
             </div>
