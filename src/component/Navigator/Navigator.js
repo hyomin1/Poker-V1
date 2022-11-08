@@ -13,7 +13,6 @@ const Navigator = () => {
                                 회원가입
                             </button>
                         </div>
-
                     </Link>
                 </li>
                 <li>

@@ -8,12 +8,14 @@ import SelectLogin from "./component/login/SelectLogin";
 import Play from "./component/play/Play";
 import CreateCard from "./card/CreateCard";
 import Server from "./Server";
+import Hello from "./component/Hello/Hello";
 
 
 function App() {
   return (
       <Routes>
-        <Route path ="/" exact = {true} element={<Main/>} />
+        <Route path ="/" exact={true} element={<Hello/>}/>
+        <Route path ="/main" exact = {true} element={<Main/>} />
         <Route path ="/login" exact = {true} element={<Login/>}/>
         <Route path ="/join" exact = {true} element={<Join/>}/>
         <Route path ="loginselect" exact={true} element={<SelectLogin/>}/>
