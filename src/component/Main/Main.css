@@ -1,11 +1,11 @@
 body{
     margin:0px;
     padding: 0px;
+    overflow: hidden;
 
 }
 .background {
 
-    overflow: hidden;
     margin: 0px ;
     position: relative;
 

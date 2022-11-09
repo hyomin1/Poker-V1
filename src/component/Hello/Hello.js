@@ -17,8 +17,6 @@ const Hello = () => {
                 </Link>
             </div>
 
-
-
         </body>
 
 

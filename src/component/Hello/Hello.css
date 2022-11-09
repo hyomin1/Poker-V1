@@ -28,4 +28,6 @@ body {
 p:hover {
     color:gray;
 }
-
+a {
+    text-decoration: none;
+}

@@ -7,7 +7,7 @@ const Main = () => {
             <div className="background">
                 <video className="mainVideo" src ="/videos/card.mp4" muted autoPlay loop/>
                 <div className="mainPage">
-                    <Link to ="/play">
+                    <Link to ="/game">
                         <p>게임시작</p>
                     </Link>
                     <Link to ="/join">

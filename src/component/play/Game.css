@@ -1,6 +1,10 @@
-body {
-    background-image: url("table.webp");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: 0px -70px;
+.start {
+    text-align: center;
+    font-size:60px;
+    color:red;
+    font-family: Impact,Charcoal,sans-serif;
+
+}
+a {
+    text-decoration: none;
 }
