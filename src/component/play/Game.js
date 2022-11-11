@@ -1,4 +1,5 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,} from 'react';
+import { useNavigate } from "react-router-dom";
 import './Game.css'
 import axios from 'axios';
 import Poker from './Poker';
@@ -12,12 +13,16 @@ const Game = () => {
             console.log("테이블 요청!");
         });//table 요청
     }
+    const navigate = useNavigate(); //유저 수를 넘겨주기 위한 navigate변수설정
     const gameStart = () => {
         if(user>=2&&user<=6)
             return (
-                <Link to ="/poker">
-                    <p className="start">게임 시작</p>
-                </Link>
+                <div className="underline">
+                        <p onClick={()=> {
+                            navigate("/poker",{state: {user:user}}) //poker페이지 이동시 현재 user인원수 전달
+                        }} className="start">입장하기</p>
+                </div>
+
             )
     }
     return (
@@ -70,7 +75,7 @@ const Game = () => {
                     {gameStart()}
 
             </div>
-        <Poker user = {user}/>
+
         </body>
     );
 };

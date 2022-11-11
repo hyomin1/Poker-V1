@@ -2,7 +2,7 @@ import React, {useState,useEffect} from 'react';
 import './Card.css';
 import axios from 'axios';
 import './Animation.css';
-
+import Bet from '../play/Bet';
 const Card = (props) => {
     const [data,setData] = useState();
     const receiveData = ()=>{   //서버에 데이터 요청
@@ -42,50 +42,29 @@ const Card = (props) => {
             ...cardNumber,[e.target.name] : e.target.value,
         })
     }
+
+
         return (
             <div>
                 <div className="container">
                     <div className="card pullDown">
                         <img id ="img1" src ="/images/backimage.png"/>
                         <img id ="img2" src ="/images/backimage.png"/>
+                        {receiveData()}
                     </div>
                     <div className="reverse" >
-                        <button onClick={()=> {
-                            receiveData()
-                            //하나의 버튼에 2개의 이벤트
-                        }}>랜덤 값 요청</button>
                         <button
                             onClick={()=> {
-                                console.log(data) //받아온 데이터 확인
                                 handleclickRandom1()
                                 handleclickRandom2()
+
                         }}>카드 뒤집기</button>
+                        <div className="bet">
+                            <Bet/>
+                        </div>
                     </div>
-                    <div className="inform">
-                        <input
-                            type="number"
-                            placeholder="카드 값 입력1"
-                            onChange={onChangeAccount}
-                            value={cardNumber.card1}
-                            name="card1"
-                        />
-                        <input
-                            type="number"
-                            placeholder="카드 값 입력2"
-                            onChange={onChangeAccount}
-                            value={cardNumber.card2}
-                            name="card2"
-                        />
-                        <button onClick={()=> {  // 서버 요청 예시 , 아직 미지수
-                            console.log(cardNumber.card1)
-                            console.log(cardNumber.card2)
-                            sendData()
-                        }}>전달</button>
-                        <button onClick={()=> {
-                            handleClick1()
-                            handleClick2()
-                        }}>카드 뒤집기</button>
-                    </div>
+                    
+
                 </div>
             </div>
         );

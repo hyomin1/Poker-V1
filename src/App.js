@@ -6,11 +6,12 @@ import Main from "./component/Main/Main";
 import Login from "./component/login/Login";
 import SelectLogin from "./component/login/SelectLogin";
 import Game from "./component/play/Game";
-import CreateCard from "./card/CreateCard";
+import CreateCard from "./component/card/CreateCard";
 import Server from "./Server";
 import Hello from "./component/Hello/Hello";
 import Poker from "./component/play/Poker";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Free from './component/play/Free.js';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path ="/game" exact={true} element={<Game/>}/>
         <Route path ="/server" exact={true} element={<Server/>}/>
         <Route path ="/poker" exact={true} element={<Poker/>}/>
+        <Route path = "/free" exact = {true} element ={<Free/>}/>
 
       </Routes>
   );

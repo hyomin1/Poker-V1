@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import './CreateCard.css';
 import Card from './Card'
 
-
 const CreateCard = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
