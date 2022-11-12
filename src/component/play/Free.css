@@ -1,0 +1,25 @@
+.cet{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position : relative;
+    margin-top: 100px;
+    padding-bottom:100px;
+    padding-top: 100px;
+
+}
+.c1 {
+    width:75px;
+    height :100px;
+}
+.card {
+    display:flex;
+    width:75px;
+    height :100px;
+    float: left;
+    text-align: center;
+    float:left;
+}
+.gamer {
+    width :75px;
+}

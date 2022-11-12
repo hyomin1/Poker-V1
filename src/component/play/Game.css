@@ -8,3 +8,15 @@
 .underline a {
     text-decoration: none;
 }
+.player {
+    display: flex;
+    background-color: black;
+}
+.black {
+    height: 700px;
+}
+.butn {
+    position: relative;;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,9 +1,18 @@
 body {
-    background-image: url(table.webp);
 
+    background-size: cover;
+    position : relative;
+    background-repeat: no-repeat;
 }
 .buyin {
     text-align: center;
     justify-content: center;
     align-items: center;
+    display: flex;
+}
+.gameplayer {
+    width: 75px;
+    position: relative;
+    bottom : -500px;
+    right: -400px;
 }
