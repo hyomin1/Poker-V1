@@ -1,14 +1,12 @@
-.cet{
+.set{
     justify-content: center;
     align-items: center;
     display: flex;
     position : relative;
-    margin-top: 100px;
-    padding-bottom:100px;
-    padding-top: 100px;
+    padding-top:10px;
 
 }
-.c1 {
+.c2 {
     width:75px;
     height :100px;
 }
@@ -18,8 +16,11 @@
     height :100px;
     float: left;
     text-align: center;
-    float:left;
+
 }
-.gamer {
+.gamer2_1 {
     width :75px;
+}
+.gamer2_2 {
+    width: 75px;
 }

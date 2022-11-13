@@ -17,19 +17,16 @@ const Game = () => {
     const gameStart = () => {
         if(user>=2&&user<=6)
             return (
-                <div className="underline">
+                <div className="underline pulse">
                         <p onClick={()=> {
                             navigate("/poker",{state: {user:user}})
                             //poker페이지 이동시 현재 user인원수 전달
                         }} className="start">입장하기</p>
                 </div>
-
             )
     }
     return (
-
             <div className="player">
-                <img className = "black "src ="/images/black.jpg"/>
                 <div className="butn">
                     <button className="p1" onClick={(e)=> {
                         console.log("Player1입장");  //확인용 메시지(삭제)
@@ -73,11 +70,11 @@ const Game = () => {
                         receiveTable();  //테이블 요청
                         setUser(user+1);  //유저수 1명 추가
                     }}>Player6</button>
+                    {gameStart()}
 
                 </div>
-
                     {console.log(user)}
-                    {gameStart()}
+
 
             </div>
 

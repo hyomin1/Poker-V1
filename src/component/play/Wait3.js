@@ -1,9 +1,6 @@
-import React, {useState,useEffect} from 'react';
-import './Free.css';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import Bet from './Bet';
-import CreateCard from '../card/CreateCard';
-const Free = () => {
+const Wait3 = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
         {id :1, src: '/images/2_of_spades.png'},
@@ -58,81 +55,50 @@ const Free = () => {
         {id :50, src: '/images/queen_of_diamonds.png'},
         {id :51, src: '/images/king_of_diamonds.png'},
     ]);
-    useEffect(()=> {
-        receiveData();
-    },[]);
-
-    //카드 번호 입력후 요청 관련 함수들
     const [data,setData] = useState();
-    const receiveData = ()=>{   //서버에 데이터 요청
+    useEffect(()=> {
         axios.get('https://jsonplaceholder.typicode.com/todos/1').then((reponse) => {
-            console.log('데이터요청!');
+            console.log('카드 두장 요청!');
             setData(reponse.data);
         });
-    }
-    //입력한 2개의 데이터 서버에 요청(등록)
-    const sendData = () => {   //아직 미지수
-        axios.post('https://jsonplaceholder.typicode.com/todos/1', {
-            cardNumber
-        }).then(response => {
-            console.log(response)
-        })
-    }
-    const handleclickRandom1 = (e) =>{
-        document.getElementById("img1").src = images[data.id].src; //배열 인덱스 변경해야함-> data.card1
-    }
-    const handleclickRandom2 = (e) => {
-        document.getElementById("img2").src = images[data.id].src; //배열 인덱스 변경해야함 -> data.card2
-    }
-    const [cardNumber,setcardNumber] = useState({   //입력한 2개의 카드 숫자가 저장될 공간
-        card1:"",
-        card2:"",
-    });
 
-    const handleClick1 = (e) => {   //내가 입력한 카드숫자 뒤집는것 ,잠깐 랜덤확인을 위해 변수 변경
-        document.getElementById("img1").src = images[cardNumber.card1].src;
-    }
-    const handleClick2 = (e) => {  //내가 입력한 카드숫자 뒤집는것
-        document.getElementById("img2").src = images[cardNumber.card2].src;
-    }
-    const onChangeAccount = (e) => {     //2개의 입력한 카드 숫자를 받아오는 함수
-        setcardNumber({
-            ...cardNumber,[e.target.name] : e.target.value,
-        })
-    }
+    },[])
+    setTimeout(function (){  //게임 입장후 2초뒤에 받아온 카드 뒤집어줌   , 대기뷰 이므로 서버로부터 받은값을 바로 그냥 화면에 띄우면됨
+        document.getElementById("imgM1").src = images[data.id].src;
+        document.getElementById("imgM2").src = images[data.id].src;
+    },);
+
     return (
         <div>
             <div>
-                <img className ="gamer2_1" src ="/images/player.png"/>
-            </div>
-            <div>
-                <img className ="gamer2_2" src ="/images/player.png"/>
-            </div>
-            <div className = "set pullDown">
-                <img className="c2" src ="/images/backimage.png"/>
-                <img className="c2" src ="/images/backimage.png"/>
-                <img className="c2" src ="/images/backimage.png"/>
-                <img className="c2" src ="/images/backimage.png"/>
-                <img className="c2" src ="/images/backimage.png"/>
-            </div>
-            <div className="card pullDown">
-                <img id ="img1" src ="/images/backimage.png"/>
-                <img id ="img2" src ="/images/backimage.png"/>
-            </div>
-            <div className="reverse" >
-                <button
-                    onClick={()=> {
-                        console.log(data);
-                        handleclickRandom1()
-                        handleclickRandom2()
-                    }}>카드 뒤집기</button>
-                <div className="bet">
-                    <Bet/>
+                <div className="g3p">
+                    <div className ="g3p1">
+                        <img className ="gamer3_1" src ="/images/player.png"/>
+                        <img id ="imgD1" src ="/images/backimage.png"/>
+                        <img id ="imgD2" src ="/images/backimage.png"/>
+                    </div>
+                    <div className="g3p2">
+                        <img className ="gamer3_1" src ="/images/player.png"/>
+                        <img id ="imgD3" src ="/images/backimage.png"/>
+                        <img id ="imgD4" src ="/images/backimage.png"/>
+                    </div>
+                </div>
+                <div className="set3 pullDown">
+                    <img className="c3" src ="/images/backimage.png"/>
+                    <img className="c3" src ="/images/backimage.png"/>
+                    <img className="c3" src ="/images/backimage.png"/>
+                    <img className="c3" src ="/images/backimage.png"/>
+                    <img className="c3" src ="/images/backimage.png"/>
+                </div>
+                <div className="g3p3">
+                    <img className ="gamer3_2" src ="/images/player.png"/>
+                    <img id ="imgM1" src ="/images/backimage.png"/>
+                    <img id ="imgM2" src ="/images/backimage.png"/>
+
                 </div>
             </div>
-
         </div>
-
     );
 };
-export default Free;
+
+export default Wait3;

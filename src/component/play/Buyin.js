@@ -3,7 +3,6 @@ import Poker from './Poker';
 import axios from 'axios';
 const Buyin = (props) => {
     const [stack,setStack] = useState();
-
     const onChangeStack = (e) => {     //2개의 입력한 카드 숫자를 받아오는 함수
         setStack(e.target.value)
     }

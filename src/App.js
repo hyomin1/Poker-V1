@@ -16,7 +16,7 @@ import Three from './component/play/Three.js';
 import Four from './component/play/Four.js';
 import Five from './component/play/Five.js';
 import Six from './component/play/Six.js';
-import Waiting from './component/play/Waiting';
+import Wait3 from './component/play/Wait3';
 
 function App() {
   return (
@@ -34,7 +34,7 @@ function App() {
         <Route path = "/four" exact ={true} element ={<Four/>}/>
         <Route path = "/five" exact = {true} element = {<Five/>}/>
         <Route path = "/six" exact ={true} element = {<Six/>}/>
-        <Route path = "/wait" exact={true} element = {<Waiting/>}/>
+        <Route path = "/wait" exact={true} element = {<Wait3/>}/>
 
       </Routes>
   );
