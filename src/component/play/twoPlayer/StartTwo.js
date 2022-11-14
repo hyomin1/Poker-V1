@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-const Wait3 = () => {
+import Bet2 from "../Bet2";
+import Bet from "../Bet";
+import './StartTwo.css';
+import axios from "axios";
+
+const StartTwo = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
         {id :1, src: '/images/2_of_spades.png'},
@@ -55,50 +59,50 @@ const Wait3 = () => {
         {id :50, src: '/images/queen_of_diamonds.png'},
         {id :51, src: '/images/king_of_diamonds.png'},
     ]);
-    const [data,setData] = useState();
     useEffect(()=> {
-        axios.get('https://jsonplaceholder.typicode.com/todos/1').then((reponse) => {
-            console.log('카드 두장 요청!');
+        receiveData(); //게임 시작 우선순위, 플레이어번호, 카드1,2 ,
+    },[]);
+    //카드 번호 입력후 요청 관련 함수들
+    const [data,setData] = useState();
+    const id =1;
+    const receiveData = ()=>{   //서버에 데이터 요청
+        axios.put(`http://localhost:8080/game/joinGame/${id}`).then((reponse) => {
+            console.log('데이터요청!');
+            console.log(reponse);
             setData(reponse.data);
         });
-
-    },[])
-    setTimeout(function (){  //게임 입장후 2초뒤에 받아온 카드 뒤집어줌   , 대기뷰 이므로 서버로부터 받은값을 바로 그냥 화면에 띄우면됨
-        document.getElementById("imgM1").src = images[data.id].src;
-        document.getElementById("imgM2").src = images[data.id].src;
-    },);
+    }
+    setTimeout(function() {
+        document.getElementById("img2M1").src =images[data.data.id].src;  //인덱스는 받아온데이터 card1으로 수정
+    },1000);  //게임 시작 후 프리플랍시 카드 뒤집기
+    setTimeout(function() {
+        document.getElementById("img2M2").src= images[data.data.player[0].card2].src;
+    },1200); //게임 시작 후 프리플랍시 카드 뒤집기
 
     return (
         <div>
-            <div>
-                <div className="g3p">
-                    <div className ="g3p1">
-                        <img className ="gamer3_1" src ="/images/player.png"/>
-                        <img id ="imgD1" src ="/images/backimage.png"/>
-                        <img id ="imgD2" src ="/images/backimage.png"/>
-                    </div>
-                    <div className="g3p2">
-                        <img className ="gamer3_1" src ="/images/player.png"/>
-                        <img id ="imgD3" src ="/images/backimage.png"/>
-                        <img id ="imgD4" src ="/images/backimage.png"/>
-                    </div>
-                </div>
-                <div className="set3 pullDown">
-                    <img className="c3" src ="/images/backimage.png"/>
-                    <img className="c3" src ="/images/backimage.png"/>
-                    <img className="c3" src ="/images/backimage.png"/>
-                    <img className="c3" src ="/images/backimage.png"/>
-                    <img className="c3" src ="/images/backimage.png"/>
-                </div>
-                <div className="g3p3">
-                    <img className ="gamer3_2" src ="/images/player.png"/>
-                    <img id ="imgM1" src ="/images/backimage.png"/>
-                    <img id ="imgM2" src ="/images/backimage.png"/>
-
-                </div>
+            <div className="g2p1">
+                <img className="gamer2_1" src="/images/player.png"/>
+                <img id ="img2D1" src ="/images/backimage.png"/>
+                <img id ="img2D2" src ="/images/backimage.png"/>
+                <Bet2/>
             </div>
+            <div className = "set2 pullDown">
+                <img id="rc2_1" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_2" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_3" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_4" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_5" className="c2" src ="/images/backimage.png"/>
+            </div>
+            <div className ="g2p2">
+                <img className="gamer2_2" src="/images/player.png"/>
+                <img id ="img2M1" src ="/images/backimage.png"/>
+                <img id ="img2M2" src ="/images/backimage.png"/>
+                <Bet/>
+            </div>
+
         </div>
     );
 };
 
-export default Wait3;
+export default StartTwo;
