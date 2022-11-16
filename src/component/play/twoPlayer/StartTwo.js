@@ -6,7 +6,6 @@ import axios from "axios";
 import {useLocation} from "react-router";
 import {Provider} from 'react-redux';
 const StartTwo = () => {
-
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
         {id :1, src: '/images/2_of_spades.png'},
@@ -61,28 +60,28 @@ const StartTwo = () => {
         {id :50, src: '/images/queen_of_diamonds.png'},
         {id :51, src: '/images/king_of_diamonds.png'},
     ]);
-    const [card,setCard] = useState();
+    const [data,setData] = useState();
     const id =1;
+
     useEffect(()=> {
         axios.put(`http://localhost:8080/api/board/gameStart/1`).then((response) => {
-            console.log('카드데이터요청');
+            console.log('카드데이터요청!');
             console.log(response);
-            setCard(response.data);
+            setData(response.data.data);
         });
     },[]);
     const [show,setShow] = useState(false);
     //카드 번호 입력후 요청 관련 함수들
     setTimeout(function() {
-        document.getElementById("img2M1").src =images[card.data.player[0].card1].src;  //인덱스는 받아온데이터 card1으로 수정
+        //document.getElementById("img2M1").src =images[card.data.player[0].card1].src;  //인덱스는 받아온데이터 card1으로 수정
+        //alert(card.data.total_player);
     },1000);  //게임 시작 후 프리플랍시 카드 뒤집기
     setTimeout(function() {
-        document.getElementById("img2M2").src= images[card.data.player[0].card2].src;
+        // document.getElementById("img2M2").src= images[card.data.player[0].card2].src;
     },1200); //게임 시작 후 프리플랍시 카드 뒤집기
     setTimeout(function () {
         setShow(true);
     },2500);
-
-
     return (
         <div>
             <div className="g2p1">
@@ -101,7 +100,8 @@ const StartTwo = () => {
                 <img className="gamer2_2" src="/images/player.png"/>
                 <img id ="img2M1" src ="/images/backimage.png"/>
                 <img id ="img2M2" src ="/images/backimage.png"/>
-                {show&&<Bet card={card} setCard={setCard}/>}
+                {show&&<Bet data={data} setData={setData}/>}
+
             </div>
 
 

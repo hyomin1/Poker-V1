@@ -1,16 +1,17 @@
-
 .pad {
     padding-top:300px;
     text-align: center;
-    padding-bottom: 450px;
+    padding-bottom: 480px;
 }
 .w2p1 {
-    text-align: center;
-
+    display: flex;
+    justify-content: center;
+    height: 100px;
 }
 .w2p2{
-    position: relative;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 100px;
 }
 .gamerW2_1 {
     width:75px;
@@ -20,4 +21,58 @@
 }
 .fixedBtn {
     position:absolute;
+
+}
+.g2p1 {
+    float: right;
+}
+.g2p2 {
+    float : left;
+}
+#img2D1 {
+    width:75px;
+    height :100px;
+}
+#img2D2 {
+    width:75px;
+    height :100px;
+}
+#img2M1 {
+    width:75px;
+    height :100px;
+}
+#img2M2{
+    width:75px;
+    height :100px;
+}
+.c2 {
+    width:75px;
+    height: 100px;
+}
+.set2 {
+    text-align: center;
+    padding-bottom:350px;
+}
+
+.fold {
+    background-color: black;
+    color : white;
+    border-color :white;
+    width : 75px;
+}
+.check {
+    background-color: black;
+    color:blue;
+    border-color: blue;
+    width : 75px;
+}
+.raise {
+    background-color: black;
+    color:yellow;
+    border-color: yellow;
+    width : 75px;
+}
+.bet1 {
+    padding-top: 68px;
+    height : 50px;
 }

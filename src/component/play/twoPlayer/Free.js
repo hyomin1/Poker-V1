@@ -60,31 +60,100 @@ const Free = () => {
         {id :50, src: '/images/queen_of_diamonds.png'},
         {id :51, src: '/images/king_of_diamonds.png'},
     ]);
-
-    const id =1;
     const [card,setCard] = useState();
+    useEffect(()=> {  //카드 데이터 요청
+        axios.put(`https://jsonplaceholder.typicode.com/todos/1`).then((response) => { //http://localhost:8080/api/board/gameStart/1
+            console.log('카드데이터요청');
+            console.log(response.data);
+            setCard(response.data);
+        });
+    },[]);
+
+    const cardImg = () => {
+        return (
+            <div className="set2 pullDown">
+                <img id="rc2_1" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_2" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_3" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_4" className="c2" src ="/images/backimage.png"/>
+                <img id="rc2_5" className="c2" src ="/images/backimage.png"/>
+            </div>
+        )
+    }
+    const playerCard1 = () => {  //player1 card1 , card2
+        return (
+            <div className="g2p1">
+                <img id ="img2D1" src ="/images/backimage.png"/>
+                <img id ="img2D2" src ="/images/backimage.png"/>
+            </div>
+        )
+    }
+    const playerCard2 = () => { //player2 card1 , card2
+        return (
+            <div className="g2p2">
+                <img id ="img2M1" src ="/images/backimage.png"/>
+                <img id ="img2M2" src ="/images/backimage.png"/>
+            </div>
+        )
+    }
+    const [btn,setBtn] = useState(true);
+    const betBtn = () => {//배팅 버튼
+        return (
+            <div className ="bet1">
+                <button id="f" className="fold" onClick={()=> {
+                    alert('폴드');
+                    document.getElementById("f").style.display='none';
+                    document.getElementById("c").style.display='none';
+                    document.getElementById("r").style.display='none';
+                }}>폴드</button>
+                <button id = "c" className="check" onClick={() => {
+                    document.getElementById("f").style.display='none';
+                    document.getElementById("c").style.display='none';
+                    document.getElementById("r").style.display='none';
+
+                }}>체크</button>
+                <button id = "r" className="raise" onClick={() => {
+                    document.getElementById("f").style.display='none';
+                    document.getElementById("c").style.display='none';
+                    document.getElementById("r").style.display='none';
+                }}>레이즈</button>
+            </div>
+        )
+    }
+    const id =1;
     const navigate = useNavigate();
-    const [visible,setVisible] = useState(true);
-    const [show,setShow] = useState(false);
+    const [visible,setVisible] = useState(true);  //버튼 사라지게하는 상태값
+    const [show,setShow] = useState(false); //버튼 누를시 카드 보이게
+    setTimeout(function() {
+        document.getElementById("img2M1").src =images[card.id].src;  //card.data.player[0].card1
+    },1800);  //게임 시작 후 프리플랍시 카드 뒤집기
+    setTimeout(function() {
+        document.getElementById("img2M2").src= images[card.id].src;  //card.data.player[0].card2
+    },2100); //게임 시작 후 프리플랍시 카드 뒤집기
+
     return (
         <div>
             <div className="w2p1">
                 <img className="gamerW2_1" src="/images/player.png"/>
+                {show&&playerCard1()}
             </div>
-            <div className = "pad">
-                {visible&&<button className="fixedBtn" onClick={() => {
+            {visible&&<div className = "pad">
+                <button className="fixedBtn" onClick={() => {
                     setVisible(false);
                     setShow(true);
-                }}>게임시작</button>}
-            </div>
+                    alert(card.id);
+                }}>게임시작</button>
+            </div>}
             <div>
-                {show&&<img id="rc2_1" className="c2" src ="/images/backimage.png"/>
-                }
+                {show&&cardImg()}
             </div>
             <div className ="w2p2">
+                {show&&playerCard2()}
                 <img className="gamerW2_2" src="/images/player.png"/>
+                {betBtn()}
             </div>
         </div>
     );
 };
+
 export default Free;
