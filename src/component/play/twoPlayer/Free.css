@@ -6,8 +6,10 @@
 }
 .w2p1 {
     text-align: center;
+
 }
 .w2p2{
+    position: relative;
     text-align: center;
 }
 .gamerW2_1 {
@@ -15,4 +17,7 @@
 }
 .gamerW2_2 {
     width:75px;
+}
+.fixedBtn {
+    position:absolute;
 }

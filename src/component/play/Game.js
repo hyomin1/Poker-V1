@@ -25,6 +25,7 @@ const Game = () => {
                 </div>
             )
     }
+
     return (
             <div className="player">
                 <div className="butn">

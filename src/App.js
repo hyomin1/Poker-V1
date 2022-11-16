@@ -16,8 +16,8 @@ import Three from './component/play/Three.js';
 import Four from './component/play/Four.js';
 import Five from './component/play/Five.js';
 import Six from './component/play/Six.js';
-import Wait3 from './component/play/Wait3';
 import StartTwo from "./component/play/twoPlayer/StartTwo";
+import WaitTwo from "./component/play/twoPlayer/WaitTwo";
 
 function App() {
   return (
@@ -35,9 +35,8 @@ function App() {
         <Route path = "/four" exact ={true} element ={<Four/>}/>
         <Route path = "/five" exact = {true} element = {<Five/>}/>
         <Route path = "/six" exact ={true} element = {<Six/>}/>
-        <Route path = "/wait" exact={true} element = {<Wait3/>}/>
+        <Route path = "/wait2" exact={true} element = {<WaitTwo/>}/>
         <Route path ="/twoGame" exact={true} element={<StartTwo/>}/>
-
       </Routes>
   );
 }
