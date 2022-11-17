@@ -59,15 +59,18 @@ const Free = () => {
         {id :49, src: '/images/jack_of_diamonds.png'},
         {id :50, src: '/images/queen_of_diamonds.png'},
         {id :51, src: '/images/king_of_diamonds.png'},
-    ]);
-    const [card,setCard] = useState();
-    useEffect(()=> {  //카드 데이터 요청
-        axios.put(`https://jsonplaceholder.typicode.com/todos/1`).then((response) => { //http://localhost:8080/api/board/gameStart/1
-            console.log('카드데이터요청');
-            console.log(response.data);
-            setCard(response.data);
-        });
+    ]); //꼼수 사용
+    useEffect(() => {
+            axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
+                .then((response) => { //http://localhost:8080/api/board/gameStart/1
+
+                    setData(response.data);
+                });
+
     },[]);
+    const [data,setData] = useState();
+
+
 
     const cardImg = () => {
         return (
@@ -96,8 +99,8 @@ const Free = () => {
             </div>
         )
     }
-    const [btn,setBtn] = useState(true);
-    const betBtn = () => {//배팅 버튼
+
+    const betBtn1 = () => {//배팅 버튼
         return (
             <div className ="bet1">
                 <button id="f" className="fold" onClick={()=> {
@@ -105,12 +108,19 @@ const Free = () => {
                     document.getElementById("f").style.display='none';
                     document.getElementById("c").style.display='none';
                     document.getElementById("r").style.display='none';
+                    //data.data.player[data.data.betPos] =2;
+                    /*axios.put('http://localhost:8080/api/board/foldBetting',{        // PUT
+                        data: data,*/
+                    data.id=2; //예시 값 변경
+                    console.log(data); //변경된 예시 값 확인
                 }}>폴드</button>
                 <button id = "c" className="check" onClick={() => {
                     document.getElementById("f").style.display='none';
                     document.getElementById("c").style.display='none';
                     document.getElementById("r").style.display='none';
-
+                    //let call_cost = data.data.bet - data.plyaer[data.data.betPos].cal;
+                    //data.data.player[data.data.betPos].stack -= call_cost;
+                    //data.data.player[data.data.betPos].cal = data.data.bet;
                 }}>체크</button>
                 <button id = "r" className="raise" onClick={() => {
                     document.getElementById("f").style.display='none';
@@ -120,37 +130,94 @@ const Free = () => {
             </div>
         )
     }
-    const id =1;
+    const betBtn2 = () => {
+        <div className="bet2">
+            <button id="f" className="fold" onClick={()=> {
+                alert('폴드');
+                document.getElementById("f").style.display='none';
+                document.getElementById("c").style.display='none';
+                document.getElementById("r").style.display='none';
+                //data.data.player[data.data.betPos] =2;
+                data.id=2;
+                console.log(data.id);
+            }}>폴드</button>
+            <button id = "c" className="check" onClick={() => {
+                document.getElementById("f").style.display='none';
+                document.getElementById("c").style.display='none';
+                document.getElementById("r").style.display='none';
+            }}>체크</button>
+            <button id = "r" className="raise" onClick={() => {
+                document.getElementById("f").style.display='none';
+                document.getElementById("c").style.display='none';
+                document.getElementById("r").style.display='none';
+            }}>레이즈</button>
+        </div>
+    }
+    const betBtn3 = () => {
+        <div className="bet3">
+            <button id="f" className="fold" onClick={()=> {
+                alert('폴드');
+                document.getElementById("f").style.display='none';
+                document.getElementById("c").style.display='none';
+                document.getElementById("r").style.display='none';
+                //card.data.player[card.data.betPos] =2;
+                data.id=2; //예시로 변경
+                console.log(data.id); //변경된 예시 확인
+            }}>폴드</button>
+            <button id="all" className ="allIn" onClick={() => {
+                alert('올인');
+                document.getElementById("f").style.display='none';
+                document.getElementById("all").style.display='none';
+            }}>
+            올인</button>
+        </div>
+    }
+    const [betting,setBetting] = useState();
     const navigate = useNavigate();
     const [visible,setVisible] = useState(true);  //버튼 사라지게하는 상태값
     const [show,setShow] = useState(false); //버튼 누를시 카드 보이게
+      //게임 시작 후 프리플랍시 카드 뒤집기
     setTimeout(function() {
-        document.getElementById("img2M1").src =images[card.id].src;  //card.data.player[0].card1
-    },1800);  //게임 시작 후 프리플랍시 카드 뒤집기
-    setTimeout(function() {
-        document.getElementById("img2M2").src= images[card.id].src;  //card.data.player[0].card2
-    },2100); //게임 시작 후 프리플랍시 카드 뒤집기
+        document.getElementById("img2M1").src =images[data.id].src;  //card.data.player[0].card1
+        document.getElementById("img2M1").addClass("flip-vertical-right");
+       // console.log(data.id);
+    },3000); //게임 시작 후 프리플랍시 카드 뒤집기
+    setTimeout(function () {
+        document.getElementById("img2M2").src= images[data.id].src;  //card.data.player[0].card2
+    },3500);
+    const print = () => {
+        alert(data.id);
+    }
+
+    setTimeout(function () {
+        setBetting();
+    })
 
     return (
-        <div>
+
+        <div className="board">
             <div className="w2p1">
                 <img className="gamerW2_1" src="/images/player.png"/>
                 {show&&playerCard1()}
             </div>
-            {visible&&<div className = "pad">
-                <button className="fixedBtn" onClick={() => {
+            {visible&&<button className="fixedBtn" onClick={() => {
                     setVisible(false);
                     setShow(true);
-                    alert(card.id);
-                }}>게임시작</button>
-            </div>}
-            <div>
-                {show&&cardImg()}
-            </div>
+                    console.log('카드데이터요청!');
+                    console.log(data);//값을 받아옴 data.id
+                    //게임 시작 누르고 카드 뒤집은 후 배팅화면 보여줌
+                }}>게임시작</button>}
+            {show && cardImg()}
+            {}
+
             <div className ="w2p2">
-                {show&&playerCard2()}
-                <img className="gamerW2_2" src="/images/player.png"/>
-                {betBtn()}
+                <div>
+                    <img className="gamerW2_2" src="/images/player.png"/>
+                    {show&&playerCard2()}
+                </div>
+                {betting===1&&betBtn1()}
+
+
             </div>
         </div>
     );

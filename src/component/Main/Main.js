@@ -5,13 +5,10 @@ import axios from 'axios';
 
 const Main = () => {
     const id = 1;
-    const [data1, setData] = useState();
+    const [data, setData] = useState();
   //서버에 데이터 요청
     const Data = () => {
-        useEffect(()=> {
-        },[]);
-
-    }
+     }
         return (
             <body>
             <div className="background">
@@ -20,12 +17,9 @@ const Main = () => {
                     <Link to="/free">
                         <p onClick={() => {
                             axios.put(`http://localhost:8080/game/joinGame/1`).then((response) => {
-                                console.log('카드데이터요청!');
-
+                                console.log('테이블요청!');
                                 setData(response.data);
-
                             });
-
                         }}>게임시작</p>
                     </Link>
                     <Link to="/join">

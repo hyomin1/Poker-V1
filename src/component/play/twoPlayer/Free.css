@@ -1,33 +1,54 @@
-.pad {
-    padding-top:300px;
-    text-align: center;
-    padding-bottom: 480px;
+.board {
+    display : flex;
+    justify-content: center;
+    width : 100vw;
+    height: 100vh;
+}
+.fixedBtn {
+    position:absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top:40%;
+    width : 200px;
+    height : 50px;
+    font-size : 30px;
+    border-color: white;
+    background-color: black;
+    color:white;
 }
 .w2p1 {
     display: flex;
     justify-content: center;
     height: 100px;
+    float: right;
+    position: absolute;
+    top:0;
 }
 .w2p2{
     display: flex;
-    justify-content: center;
-    height: 100px;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+
+}
+.w2p2 div:nth-child(1){
+   display: flex;
 }
 .gamerW2_1 {
     width:75px;
+    height: 100px;
 }
 .gamerW2_2 {
     width:75px;
+    height: 100px;
 }
-.fixedBtn {
-    position:absolute;
+
+.g2p1 {
 
 }
-.g2p1 {
-    float: right;
-}
 .g2p2 {
-    float : left;
+
 }
 #img2D1 {
     width:75px;
@@ -50,8 +71,13 @@
     height: 100px;
 }
 .set2 {
-    text-align: center;
-    padding-bottom:350px;
+    position: absolute;
+    top:40%;
+    display: flex;
+    justify-content: center;
+}
+.card_five {
+    width: 100%;
 }
 
 .fold {
@@ -73,6 +99,25 @@
     width : 75px;
 }
 .bet1 {
-    padding-top: 68px;
+    margin-top: 5px;
+
+}
+.bet2 {
+    padding-top: 5px;
     height : 50px;
+}
+.bet3 {
+     padding-top: 5px;
+     height : 50px;
+ }
+.allIn {
+    background-color: black;
+    color:yellow;
+    border-color: yellow;
+    width : 75px;
+}
+.flip-vertical-right {
+    -webkit-animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    animation: flip-vertical-right 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+
 }
