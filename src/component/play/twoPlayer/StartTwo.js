@@ -59,14 +59,17 @@ const StartTwo = () => {
     const [visible,setVisible] = useState(true);  //버튼 사라지게하는 상태값
     const [show,setShow] = useState(false); //버튼 누를시 카드 보이게
     const [data,setData] = useState();
+    let priority;
     useEffect(() => {
-        axios.get(`https://jsonplaceholder.typicode.com/todos/1`)
-            .then((response) => { //http://localhost:8080/api/board/gameStart/1
+        axios.put(`http://localhost:8080/api/board/gameStart/1`)
+            .then((response) => { //http://localhost:8080/api/board/gameStart/
+                console.log('카드요청');
                 setData(response.data);
-
             });
 
     },[]);
+
+
     const reverseCard1 = () => { //게임 시작 후 프리플랍시 카드 뒤집기
         setTimeout(function() {
             document.getElementById("img2M1").src =images[data.id].src;  //card.data.player[0].card1
@@ -111,11 +114,9 @@ const StartTwo = () => {
     return (
         <div>
             <Free visible={visible} setVisible={setVisible} show={show} setShow={setShow} cardImg={cardImg}
-            playerCard1={playerCard1} playerCard2={playerCard2} data={data} setData={setData}
-            reverseCard1={reverseCard1} reverseCard2={reverseCard2} images={images} setImages={setImages}
-            bett={bett}/>
-
-
+                  playerCard1={playerCard1} playerCard2={playerCard2} data={data} setData={setData}
+                  reverseCard1={reverseCard1} reverseCard2={reverseCard2} images={images} setImages={setImages}
+                  bett={bett} priority={priority}/>
         </div>
     );
 };

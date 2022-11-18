@@ -1,24 +1,30 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useRef} from 'react';
 import './Free.css';
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {useNavigate} from 'react-router';
 import StartTwo from './StartTwo';
 import styled from "styled-components";
+import Betting from './Betting';
 const Free = (props) => {
     const {show,setShow,visible,setVisible,cardImg,playerCard1,playerCard2,data,setData
-    ,reverseCard1,reverseCard2,bett} = props;
+        ,reverseCard1,reverseCard2,bett,priority} = props;
     const betBtn1 = () => {
         return (
-            <div className="bet2">
+            <div className="bet1">
                 <button id="f" className="fold" onClick={()=> {
                     alert('폴드');
                     document.getElementById("f").style.display='none';
                     document.getElementById("c").style.display='none';
                     document.getElementById("r").style.display='none';
                     //data.data.player[data.data.betPos] =2;
-                    data.id=2;
-                    console.log(data.id);
+                    axios.put('http://localhost:8080/api/board/foldBetting',{
+                        data:{data}
+                    }).then(() => {
+                        console.log('데이터 전송!');
+                    });
+                    //data.id=2;
+                    //console.log(data.id);
                 }}>폴드</button>
                 <button id = "c" className="check" onClick={() => {
                     document.getElementById("f").style.display='none';
@@ -41,7 +47,7 @@ const Free = (props) => {
                     document.getElementById("f").style.display='none';
                     document.getElementById("c").style.display='none';
                     document.getElementById("r").style.display='none';
-                    //data.data.player[data.data.betPos] =2;
+                    //data.data.player[data.data.betPos] = 2;
                     data.id=2;
                     console.log(data.id);
                 }}>폴드</button>
@@ -56,8 +62,7 @@ const Free = (props) => {
                     document.getElementById("r").style.display='none';
                 }}>레이즈</button>
             </div>
-            )
-
+        )
     }
     const betBtn3 = () => {
         return (
@@ -78,9 +83,8 @@ const Free = (props) => {
                 }}>
                     올인</button>
             </div>
-            )
+        )
     }
-    let seq;
     return (
         <div className="board">
             <div className="w2p1">
@@ -93,7 +97,6 @@ const Free = (props) => {
                 console.log('카드데이터요청!');
                 console.log(data.id);
                 //값을 받아옴 data.id
-                seq=0;
                 reverseCard1();
                 reverseCard2();
                 //게임 시작 누르고 카드 뒤집은 후 배팅화면 보여줌

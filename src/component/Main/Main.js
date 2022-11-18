@@ -9,6 +9,7 @@ const Main = () => {
   //서버에 데이터 요청
     const Data = () => {
      }
+
         return (
             <body>
             <div className="background">
