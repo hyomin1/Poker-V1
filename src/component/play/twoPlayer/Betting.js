@@ -10,7 +10,6 @@ const Betting = (props) => {
                     document.getElementById("f").style.display='none';
                     document.getElementById("c").style.display='none';
                     document.getElementById("r").style.display='none';
-                    //data.data.player[data.data.betPos] =2;
                     /*axios.put('http://localhost:8080/api/board/foldBetting',{
                         data:{data}
                     }).then(() => {

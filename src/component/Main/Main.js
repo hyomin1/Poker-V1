@@ -2,7 +2,6 @@ import React,{useState,useEffect} from 'react';
 import {Link} from "react-router-dom";
 import './Main.css';
 import axios from 'axios';
-
 const Main = () => {
     const id = 1;
     const [data, setData] = useState();
