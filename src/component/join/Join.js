@@ -1,11 +1,13 @@
 import React,{useState} from 'react';
 import './Join.css';
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 const Join = () => {
     const [username,setId] = useState();
     const [password,setPasswd] = useState();
     const [player,setPlayer] = useState();
+    const navigate = useNavigate();
 
     const onChangeId = (e) => {
         setId(e.target.value);
@@ -14,11 +16,13 @@ const Join = () => {
         setPasswd(e.target.value);
     }
     const existPlayer = () => {
-        for(let i=0;i<player.data.player.length;i++) {
-            if(username.equals(player.data.player[i].username))
-                return true;
+        if(player&&player.data!==null) {
+            alert('회원가입 완료');
+            navigate('/main');
         }
-        return false;
+
+        else
+            alert('회원가입 실패');
     };
     return (
         <div>
@@ -44,8 +48,9 @@ const Join = () => {
                 }).then((response) => {
                     console.log('회원가입 정보 전송');
                     setPlayer(response.data);
+                    console.log(response.data);
                 });
-                existPlayer?alert('이미 존재하는 아이디입니다.'):alert('회원가입 완료')
+               existPlayer();
             }}>회원가입완료</button>
         </div>
     );

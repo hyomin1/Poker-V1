@@ -19,53 +19,49 @@ const Free = (props) => {
         setRaise(e.target.value);
     };
 
-    const trash = document.createElement("div");
+    const raiseBetting = document.createElement("div");
     const rbtn = document.createElement("button");
     const input = document.createElement("input");
-    input.id = "a";
+
+    raiseBetting.appendChild(rbtn);
+    raiseBetting.appendChild(input);
+
+    input.id = "inputRaise";
     input.type = "range";
     input.name = "number";
     input.min = "10000";
     input.max = "300000";
     input.step ="1000";
     input.onchange = onChangeRaise;
-    rbtn.onClick = () => {
-        let call_cost = data.data.bet - data.data.player[0].cal;
-        data.data.player[data.data.betPos].cal += call_cost;
-        data.data.player[data.data.betPos].stack -= call_cost;
-        data.data.bet=raise;
-        setData(data); //data.data저장
-        document.getElementById("rb1").style.display='none';
-        document.getElementById("rb2").style.display='none';
-        axios.put('http://localhost:8080/api/board/raiseBetting',{
-            data:data.data //data.data로
-        }).then((response) => {
-            console.log('레이즈데이터 전송!');
-            setData(response.data);
-        });
-    }
-    console.log(raise);
-    trash.appendChild(rbtn);
-    trash.appendChild(input);
-    const a = document.getElementById("r1");
-    const b = document.getElementById("r2");
-    const raistBtn = () => {
-        return (
-            <div>
-                <input id ="rb1" type="range" name="number" min="10000" max="300000" step="1000"
-                       onChange={onChangeRaise}/>
-                <button id="rb2" onClick={() => {
 
-                }}>{raise}</button>
-            </div>
-        )
-    }
-    const raiseBet = () => {
-        return (
-            <input id ="rb1" type="range" name="number" min="10000" max="300000" step="1000"
-                   onChange={onChangeRaise}/>
-        )
-    }
+    rbtn.onchange = onChangeRaise;
+    rbtn.innerHTML = `${raise}`;
+    //rbtn.onclick
+    // rbtn.onClick = () => {
+    //     let call_cost = data.data.bet - data.data.player[0].cal;
+    //     data.data.player[data.data.betPos].cal += call_cost;
+    //     data.data.player[data.data.betPos].stack -= call_cost;
+    //     data.data.bet=raise;
+    //     setData(data); //data.data저장
+    //     document.getElementById("rb1").style.display='none';
+    //     document.getElementById("rb2").style.display='none';
+    //     axios.put('http://localhost:8080/api/board/raiseBetting',{
+    //         data:data.data //data.data로
+    //     }).then((response) => {
+    //         console.log('레이즈데이터 전송!');
+    //         setData(response.data);
+    //     });
+    // }
+    console.log(raise);
+
+   // const a = document.getElementById("r1");
+   // const b = document.getElementById("r2");
+     const raiseBet = () => {
+         return (
+             <input id ="rb1" type="range" name="number" min="10000" max="300000" step="1000"
+                    onChange={onChangeRaise}/>
+         )
+     }
     const clickRaise = () => {
         return (
             <button id="rb2" onClick={() => {
@@ -116,8 +112,8 @@ const Free = (props) => {
                     document.getElementById("f1").style.display='none';
                     document.getElementById("c1").style.display='none';
                     document.getElementById("r1").style.display='none';
-                    var addbutton = document.querySelector(".bet1");
-                    addbutton.appendChild(trash);
+                    let addbutton = document.querySelector(".bet1");
+                    addbutton.appendChild(raiseBetting);  //금액 range와 확인 버튼
                 }}>레이즈</button>
             </div>
         )
@@ -183,14 +179,17 @@ const Free = (props) => {
         <div className="board">
             <div className="w2p1">
                 <div>
-                    <img className="gamerW2_1" src="/images/player.png"/>
+                    <img className="gamerW2_1" src="/images/player1.png"/>
                     {show&&playerCard1()}
                 </div>
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&data.data.bet==0&&betBtn1()}
+
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&data.data.bet!=0&&
                     (data.data.player[data.data.betPos].stack > data.data.bet-data.data.player[data.data.betPos].cal)&&betBtn2()}
+
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&
                     (data.data.bet-data.data.player[data.data.betPos].cal>=data.data.player[data.data.betPos].stack)&&betBtn3()}
+
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&raiseShow&&raiseBet()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&raiseShow&&clickRaise()}
 
@@ -206,7 +205,7 @@ const Free = (props) => {
             {show && cardImg()}
             <div className ="w2p2">
                 <div>
-                    <img className="gamerW2_2" src="/images/player.png"/>
+                    <img className="gamerW2_2" src="/images/player2.png"/>
                     {show&&playerCard2()}
                 </div>
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&data.data.bet==0&&betBtn1()}
@@ -216,7 +215,7 @@ const Free = (props) => {
                     (data.data.bet-data.data.player[data.data.betPos].cal>=data.data.player[data.data.betPos].stack)&&betBtn3()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&raiseShow&&raiseBet()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&raiseShow&&clickRaise()}
-                {betBtn1()}
+
             </div>
         </div>
     );

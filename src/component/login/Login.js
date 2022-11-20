@@ -3,30 +3,26 @@ import './Login.css';
 import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
-import Cookies from 'universal-cookie';
 const Login = () => {
     const [inputId,setInputId] = useState();
     const [inputPw,setInputPW] = useState();
-    //const [cookies,setCookie,removeCookie] = useCookies(['ck']);
     const [user,setUser] = useState();
+    const [cookies,setCookie] = useCookies(['id']);
     const navigate = useNavigate();
-    const cookies = new Cookies();
-
     const handleInputId = (e) => {
         setInputId(e.target.value);
-        cookies.set('cookie',inputId, {
-            path:'/',
-            expires: Math.floor(Date.now()/1000)+(60*60)
-        });
     }
-
     const handleInputPw = (e) => {
         setInputPW(e.target.value);
-
     }
-    const clickLogin3 = () => {
-
+    const clickLogin = () => {
+        if((user&&user.data.username===inputId)&&(user&&user.data.password===inputPw)) {
+            alert('로그인 완료!');
+            navigate("/game");
         }
+        else
+            alert('로그인 실패!');
+    }
     return (
         <div>
             <div className="login">
@@ -53,10 +49,10 @@ const Login = () => {
                 },).then((res) => {
                         console.log('로그인 정보 전송');
                         setUser(res.data);
+                        setCookie('id',res.data.token);
                     });
-                clickLogin3() ? alert('로그인 완료!') : alert('로그인 실패!');
+                clickLogin();
             }}>로그인</button>
-
         </div>
     );
 };

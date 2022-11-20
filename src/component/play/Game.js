@@ -7,8 +7,9 @@ const Game = () => {
         <div className="background">
             <video className="mainVideo" src="/videos/card.mp4" muted autoPlay loop/>
             <div className="mainPage">
-                <Link to="/free">
-                    <p>게임시작</p>
+                <Link to="/wait">
+                    <p onClick={() => {
+                    }}>게임시작</p>
                 </Link>
                 <Link to="/logout">
                     <p>로그아웃</p>
