@@ -1,7 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import Free from './Free';
+import React, {useCallback,useEffect, useState,useRef} from 'react';
 import axios from 'axios';
-const StartTwo = () => {
+import SockJsClient from 'react-stomp';
+import SockJS from 'sockjs-client';
+import StompJS from "stompjs";
+import Free from './Free';
+
+const App = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
         {id :1, src: '/images/2_of_spades.png'},
@@ -61,24 +65,22 @@ const StartTwo = () => {
     const [data,setData] = useState(null);
     const [bet,setBet] = useState(false);
     const [betDiff,setDiff] = useState(false);
-
-    let priority;
+    const getData = async () => {
+        const datas = await axios.put('http://localhost:8080/board/gameStart/1');
+        setData(datas.data);
+    };
     useEffect(() => {
-        axios.put(`https://jsonplaceholder.typicode.com/todos/1`)
-            .then((response) => { //http://localhost:8080/api/board/gameStart/
-                console.log('카드요청');
-                setData(response.data);
-            });
+        getData();
     },[]);
     const reverseCard1 = () => { //게임 시작 후 프리플랍시 카드 뒤집기
         setTimeout(function() {
-            document.getElementById("img2M1").src =images[data.data.card.player[0].card1].src;  //card.data.player[0].card1
+            document.getElementById("img2M1").src =images[data.data.player[0].card1].src;  //card.data.player[0].card1
             // console.log(data.id);
         },1500);
     }//게임 시작 후 프리플랍시 카드 뒤집기
     const reverseCard2 = () => {
         setTimeout(function () {
-            document.getElementById("img2M2").src= images[data.data.card.player[0].card2].src;  //card.data.player[0].card2
+            document.getElementById("img2M2").src= images[data.data.player[0].card2].src;  //card.data.player[0].card2
         },1900);
     }
     const cardImg = () => {
@@ -108,7 +110,6 @@ const StartTwo = () => {
             </div>
         )
     }
-
     return (
         <div>
             <Free visible={visible} setVisible={setVisible} show={show} setShow={setShow} cardImg={cardImg}
@@ -119,4 +120,4 @@ const StartTwo = () => {
     );
 };
 
-export default StartTwo;
+export default App;

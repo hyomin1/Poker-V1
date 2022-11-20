@@ -6,11 +6,7 @@ import axios from 'axios';
 const Bet = (props) => {
     const navigate = useNavigate();
     const {data,setData} = props;
-    const axiosConfig = {
-        headers:{
-            "Content-Type": "application/json"
-        }
-    }
+
     return (
         <div>
             <button onClick={()=>

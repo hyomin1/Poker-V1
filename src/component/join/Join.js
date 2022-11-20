@@ -1,14 +1,53 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './Join.css';
+import axios from 'axios';
+
 const Join = () => {
+    const [username,setId] = useState();
+    const [password,setPasswd] = useState();
+    const [player,setPlayer] = useState();
+
+    const onChangeId = (e) => {
+        setId(e.target.value);
+    }
+    const onChangePasswd = (e) => {
+        setPasswd(e.target.value);
+    }
+    const existPlayer = () => {
+        for(let i=0;i<player.data.player.length;i++) {
+            if(username.equals(player.data.player[i].username))
+                return true;
+        }
+        return false;
+    };
     return (
         <div>
             <div className="join">
                 회원가입
-
             </div>
+            <input
+                type = "id"
+                placeholder="아이디를 입력하세요."
+                onChange={onChangeId}
+            />
+            <input
+                type = "password"
+                placeholder="비밀번호를 입력하세요."
+                onChange={onChangePasswd}
+            />
+            <button onClick={async () => {
+                await axios.post('http://localhost:8080/api/player', {
+                    data: {
+                        "username":username,
+                        "password":password
+                    }
+                }).then((response) => {
+                    console.log('회원가입 정보 전송');
+                    setPlayer(response.data);
+                });
+                existPlayer?alert('이미 존재하는 아이디입니다.'):alert('회원가입 완료')
+            }}>회원가입완료</button>
         </div>
     );
 };
-
 export default Join;

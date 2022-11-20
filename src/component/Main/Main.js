@@ -5,23 +5,16 @@ import axios from 'axios';
 const Main = () => {
     const id = 1;
     const [data, setData] = useState();
-  //서버에 데이터 요청
-    const Data = () => {
-     }
-
+    const getData = async () => {
+        const datas = await axios.put('https://jsonplaceholder.typicode.com/todos/1');//'http://localhost:8080/game/joinGame/1'
+        console.log(datas.data.id);  //async await를 사용하여 데이터를 바로 뽑아낼수있음
+        setData(datas);
+    };
         return (
-            <body>
+
             <div className="background">
                 <video className="mainVideo" src="/videos/card.mp4" muted autoPlay loop/>
                 <div className="mainPage">
-                    <Link to="/free">
-                        <p onClick={() => {
-                            axios.put(`http://localhost:8080/game/joinGame/1`).then((response) => {
-                                console.log('테이블요청!');
-                                setData(response.data);
-                            });
-                        }}>게임시작</p>
-                    </Link>
                     <Link to="/join">
                         <p>회원가입</p>
                     </Link>
@@ -30,7 +23,7 @@ const Main = () => {
                     </Link>
                 </div>
             </div>
-            </body>
+
 
         );
 
