@@ -17,6 +17,7 @@ import Four from './component/play/Four.js';
 import Five from './component/play/Five.js';
 import Six from './component/play/Six.js';
 import StartTwo from "./component/play/twoPlayer/StartTwo";
+import StartSix from "./component/play/sixPlayer/StartSix";
 import Wait from './component/play/Wait';
 import {CookiesProvider} from 'react-cookie';
 
@@ -33,8 +34,9 @@ function App() {
                   <Route path = "/three" exact={true} element ={<Three/>}/>
                 <Route path = "/four" exact ={true} element ={<Four/>}/>
                 <Route path = "/five" exact = {true} element = {<Five/>}/>
-                <Route path = "/six" exact ={true} element = {<Six/>}/>
+                <Route path = "/six" exact ={true} element = {<StartSix/>}/>
                 <Route path = "/wait" exact={true} element = {<Wait/>}/>
+
             </Routes>
     </CookiesProvider>
 

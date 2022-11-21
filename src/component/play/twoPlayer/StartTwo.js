@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import Free from './Free';
 
-const App = () => {
+const StartTwo = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
         {id :1, src: '/images/2_of_spades.png'},
@@ -118,4 +118,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default StartTwo;

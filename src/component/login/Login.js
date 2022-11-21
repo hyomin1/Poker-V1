@@ -15,8 +15,9 @@ const Login = () => {
     const handleInputPw = (e) => {
         setInputPW(e.target.value);
     }
+
     const clickLogin = () => {
-        if((user&&user.data.username===inputId)&&(user&&user.data.password===inputPw)) {
+        if(!(user&&user.data!==null)) {
             alert('로그인 완료!');
             navigate("/game");
         }
@@ -49,7 +50,7 @@ const Login = () => {
                 },).then((res) => {
                         console.log('로그인 정보 전송');
                         setUser(res.data);
-                        setCookie('id',res.data.token);
+                        setCookie('id',res.Authorization);
                     });
                 clickLogin();
             }}>로그인</button>
