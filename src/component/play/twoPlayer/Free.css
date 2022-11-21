@@ -28,7 +28,6 @@
 .w2p2{
     display: flex;
     position: absolute;
-    justify-content: center;
     bottom: 0;
     float:right;
     height: 100px;
@@ -79,7 +78,6 @@
 .card_five {
     width: 100%;
 }
-
 .fold {
     background-color: black;
     color : white;

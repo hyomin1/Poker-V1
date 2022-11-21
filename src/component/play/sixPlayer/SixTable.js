@@ -4,7 +4,7 @@ import './SixTable.css';
 const SixTable = (props) => {
     const {images,setImage,cardImg,show,setShow,visible,setVisible,
     playerCard1,playerCard2,playerCard3,playerCard4,playerCard5,playerCard6,
-    betBtn1} = props;
+    betBtn1,betBtn2,betBtn3,reverseCard1,reverseCard2} = props;
 
     return (
         <div className="board">
@@ -25,6 +25,9 @@ const SixTable = (props) => {
             {visible&&<button className="fixedBtn" onClick={ () => {
                 setShow(true); //버튼 누를시 카드 5장 보이게
                 setVisible(false); //버튼 클릭시 게임시작 버튼 사라지게함
+                console.log('카드 데이터 요청');
+                reverseCard1(); //자기 카드1 뒤집기
+                reverseCard2(); //자기 카드2 뒤집기
             }}>게임시작</button>}
             {show&&cardImg()}
             <div className ="w2p2">
@@ -40,8 +43,6 @@ const SixTable = (props) => {
                 <div className="g6">
                     <img className="gamerW2_2" src="/images/player6.png"/>
                     {show&&playerCard6()}
-                    {alert('확인')}
-
                 </div>
             </div>
         </div>

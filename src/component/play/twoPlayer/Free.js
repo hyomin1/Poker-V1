@@ -207,6 +207,7 @@ const Free = (props) => {
                 <div>
                     <img className="gamerW2_2" src="/images/player2.png"/>
                     {show&&playerCard2()}
+                    {betBtn1()}
                 </div>
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&data.data.bet==0&&betBtn1()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&data.data.bet!=0&&
@@ -215,6 +216,7 @@ const Free = (props) => {
                     (data.data.bet-data.data.player[data.data.betPos].cal>=data.data.player[data.data.betPos].stack)&&betBtn3()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&raiseShow&&raiseBet()}
                 {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&raiseShow&&clickRaise()}
+
 
             </div>
         </div>
