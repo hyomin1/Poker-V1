@@ -54,6 +54,7 @@ const Wait = () => {
                 board.data.total_player===6&&navigate('/six');
             }
             }>게임시작</button>}
+
         </div>
     );
 };

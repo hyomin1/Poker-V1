@@ -94,7 +94,6 @@ const Free = (props) => {
                         console.log('폴드데이터 전송!');
                         setData(response.data);
                     });
-                    console.log(data);
                 }}>폴드</button>
                 <button id = "c1" className="check" onClick={() => {
                     document.getElementById("f1").style.display='none';
@@ -152,6 +151,7 @@ const Free = (props) => {
             </div>
         )
     }
+
     const betBtn3 = () => {
         return (
             <div className="bet3">

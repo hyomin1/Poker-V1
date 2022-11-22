@@ -60,13 +60,14 @@ const StartTwo = () => {
     ]);
     const [visible,setVisible] = useState(true);  //버튼 사라지게하는 상태값
     const [show,setShow] = useState(false); //버튼 누를시 카드 보이게
-    const [data,setData] = useState(null);
+    const [data,setData] = useState();
     const [bet,setBet] = useState(false);
     const [betDiff,setDiff] = useState(false);
     const getData = async () => {
         const datas = await axios.put('http://localhost:8080/board/gameStart/1');
         setData(datas.data);
     };
+
     useEffect(() => {
         getData();
     },[]);

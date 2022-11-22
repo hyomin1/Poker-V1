@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import SixTable from './SixTable';
 import axios from 'axios';
 const StartSix = () => {
@@ -59,6 +59,13 @@ const StartSix = () => {
     const [show,setShow] = useState(false);
     const [visible,setVisible] = useState(true);
     const [data,setData] = useState();
+    useEffect(() => {
+        axios.put('http://localhost:8080/api/board/gameStart/1',
+        ).then(response => {
+            setData(response.data);
+            console.log(response.data);
+        })
+    },[]);
 
     const cardImg = () => {
         return (
@@ -73,8 +80,8 @@ const StartSix = () => {
     }
     const reverseCard1 = () => { //게임 시작 후 프리플랍시 카드 뒤집기
         setTimeout(function() {
-            document.getElementById("img6M1").src =images[1].src;  //data.data.player[0].card1
-            // console.log(data.id);
+            document.getElementById("img6M1").src =images[data.data.player[0].card1].src;  //data.data.player[0].card1
+            console.log(data);
         },1500);
     }//게임 시작 후 프리플랍시 카드 뒤집기
     const reverseCard2 = () => {
@@ -130,142 +137,15 @@ const StartSix = () => {
             </div>
         )
     }
-    const [raise,setRaise] = useState();
-    const onChangeRaise = (e) => {
-        setRaise(e.target.value);
-    };
-    const rangeBet2= () => {
-      return (
-          <button id="rb2" onClick={() => {
-              document.getElementById("rb1").style.display='none';
-              document.getElementById("rb2").style.display='none';
 
-              let call_cost = data.data.bet - data.data.player[0].cal;
-              data.data.player[data.data.betPos].cal += call_cost;
-              data.data.player[data.data.betPos].stack -= call_cost;
-              data.data.bet=raise;
-              setData(data); //data.data저장
-
-              axios.put('http://localhost:8080/api/board/raiseBetting',{
-                  data:data.data //data.data로
-              }).then((response) => {
-                  console.log('레이즈데이터 전송!');
-                  setData(response.data);
-              });
-          }}>{raise}</button>
-      )
-    }
-    const [rb,setRb] = useState(false);
-    const [rb1,setRb1] = useState(false);
-    const betBtn1 = () => {
-        return (
-            <div className="bet1">
-                <button id="f1" className="fold" onClick={()=> {
-                    document.getElementById("f1").style.display='none';
-                    document.getElementById("c1").style.display='none';
-                    document.getElementById("r1").style.display='none';
-                    axios.put('http://localhost:8080/api/board/foldBetting',{
-                        data:data.data //data.data로
-                    }).then((response) => {
-                        console.log('폴드데이터 전송!');
-                        setData(response.data);
-                    });
-                    console.log(data);
-                }}>폴드</button>
-                <button id = "c1" className="check" onClick={() => {
-                    document.getElementById("f1").style.display='none';
-                    document.getElementById("c1").style.display='none';
-                    document.getElementById("r1").style.display='none';
-                    axios.put('http://localhost:8080/api/board/callBetting',{
-                        data:data.data //data.data로
-                    }).then((response) => {
-                        console.log('체크데이터 전송!');
-                        setData(response.data);
-                    });
-                    console.log(data);
-                }}>체크</button>
-                <button id = "r1" className="raise" onClick={() => {
-                    document.getElementById("f1").style.display='none';
-                    document.getElementById("c1").style.display='none';
-                    document.getElementById("r1").style.display='none';
-                    setRb(true);
-                   // let addbutton = document.querySelector(".bet1");
-                   // addbutton.appendChild(raiseBetting);  //금액 range와 확인 버튼
-                }}>레이즈</button>
-                {rb&&<input id ="rb1" type="range" name="number" min="10000" max="300000" step="1000"
-                            onChange={onChangeRaise}/>}
-                {rb&&rangeBet2()}
-            </div>
-        )
-    }
-    const betBtn2 = () => {
-        return (
-            <div className="bet2">
-                <button id="f2" className="fold" onClick={()=> {
-                    document.getElementById("f2").style.display='none';
-                    document.getElementById("c2").style.display='none';
-                    document.getElementById("r2").style.display='none';
-                    axios.put('http://localhost:8080/api/board/foldBetting',{
-                        data:data.data //data.data로
-                    }).then((response) => {
-                        console.log('폴드데이터 전송!');
-                        setData(response.data);
-                    });
-                }}>폴드</button>
-                <button id = "c2" className="check" onClick={() => {
-                    document.getElementById("f2").style.display='none';
-                    document.getElementById("c2").style.display='none';
-                    document.getElementById("r2").style.display='none';
-                    axios.put('http://localhost:8080/api/board/callBetting',{
-                        data:data.data //data.data로
-                    }).then((response) => {
-                        console.log('체크데이터 전송!');
-                        setData(response.data);
-                    });
-                }}>콜</button>
-                <button id = "r2" className="raise" onClick={() => {
-                    document.getElementById("f2").style.display='none';
-                    document.getElementById("c2").style.display='none';
-                    document.getElementById("r2").style.display='none';
-                    setRb1(true);
-                }}>레이즈</button>
-                {rb1&&<input id ="rb1" type="range" name="number" min="10000" max="300000" step="1000"
-                            onChange={onChangeRaise}/>}
-                {rb1&&rangeBet2()}
-            </div>
-        )
-    }
-    const betBtn3 = () => {
-        return (
-            <div className="bet3">
-                <button id="f3" className="fold" onClick={()=> {
-                    alert('폴드');
-                    document.getElementById("f3").style.display='none';
-                    document.getElementById("c3").style.display='none';
-                    document.getElementById("r3").style.display='none';
-                    axios.put('http://localhost:8080/api/board/foldBetting',{
-                        data:data.data //data.data로
-                    }).then((response) => {
-                        console.log('폴드데이터 전송!');
-                        setData(response.data);
-                    });
-                }}>폴드</button>
-                <button id="all" className ="allIn" onClick={() => {
-                    document.getElementById("f3").style.display='none';
-                    document.getElementById("all").style.display='none';
-                }}>
-                    올인</button>
-            </div>
-        )
-    }
     return (
         <div>
             <SixTable images={images} setImages={setImages} cardImg={cardImg}
-            show={show} setShow={setShow} visible={visible} setVisible={setVisible}
-            playerCard1={playerCard1} playerCard2={playerCard2} playerCard3={playerCard3}
-            playerCard4={playerCard4} playerCard5={playerCard5} playerCard6={playerCard6}
-            betBtn1={betBtn1} reverseCard1={reverseCard1} reverseCard2={reverseCard2} betBtn2={betBtn2}
-            betBtn3={betBtn3}/>
+                      show={show} setShow={setShow} visible={visible} setVisible={setVisible}
+                      playerCard1={playerCard1} playerCard2={playerCard2} playerCard3={playerCard3}
+                      playerCard4={playerCard4} playerCard5={playerCard5} playerCard6={playerCard6}
+                      reverseCard1={reverseCard1} reverseCard2={reverseCard2}
+                      data={data} setData={setData}/>
         </div>
     );
 };

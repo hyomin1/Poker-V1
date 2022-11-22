@@ -30,13 +30,13 @@ const Join = () => {
                 placeholder="비밀번호를 입력하세요."
                 onChange={onChangePasswd}
             />
-            <button onClick={async () => {
-                await axios.post('http://localhost:8080/api/player', {
+            <button onClick={ () => {
+                axios.post('https://ec2-15-164-231-78.ap-northeast-2.compute.amazonaws.com:8080/api/player', {
                     data: {
                         "username":username,
                         "password":password
                     }
-                }).then((response) => {
+                },{allowCredentials:true}).then((response) => {
                     console.log('회원가입 정보 전송');
                     setPlayer(response.data);
                     console.log(response.data.data);
