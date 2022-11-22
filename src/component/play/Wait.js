@@ -9,7 +9,7 @@ const Wait = () => {
             console.log('board요청');
             setBoard(res.data);
         })
-    },2000);
+    },9000);
     const navigate = useNavigate();
     return (
         <div>
@@ -48,9 +48,9 @@ const Wait = () => {
             </div>}
             {board&&board.data.total_player>=2&&board.data.total_player<=6&&<button onClick={ () => {
                 board.data.total_player===2&&navigate('/free');
-                board.data.total_player===3&&navigate('/free');
-                board.data.total_player===4&&navigate('/free');
-                board.data.total_player===5&&navigate('/free');
+                board.data.total_player===3&&navigate('/three');
+                board.data.total_player===4&&navigate('/four');
+                board.data.total_player===5&&navigate('/five');
                 board.data.total_player===6&&navigate('/six');
             }
             }>게임시작</button>}

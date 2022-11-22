@@ -3,6 +3,9 @@ import './Login.css';
 import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
+import styled from 'styled-components';
+import AuthContent from './AuthContent';
+
 const Login = () => {
     const [inputId,setInputId] = useState();
     const [inputPw,setInputPW] = useState();
@@ -25,35 +28,45 @@ const Login = () => {
             alert('로그인 실패!');
     }
     return (
-        <div>
-            <div className="login">
-                로그인
+        <div className="loginBody">
+            <div className="loginBody2">
+                <form className="loginForm">
+                    <h1 className="header">로그인</h1>
+                    <label className="loginLabel">ID</label>
+                    <input className="loginInput"
+                           type = "id"
+                           placeholder="Enter username"
+                           onChange={handleInputId}
+                    />
+                    <label className="loginLabel">
+                        Password</label>
+                    <input className="loginInput"
+                           type = "password"
+                           placeholder="Enter password"
+                           onChange={handleInputPw}
+                    />
+                    <p className="goJoin" onClick={() => {
+                        navigate('/join');
+                    }}>회원이 아니신가요?</p>
+                    <button className = "loginBtn" onClick={ async () => {
+                        await axios.put('http://localhost:8080/api/player/login',{
+                            data:{
+                                "username":inputId,
+                                "password":inputPw
+                            }
+                        },).then((res) => {
+                            console.log('로그인 정보 전송');
+                            setUser(res.data);
+                            setCookie('id',res.Authorization);
+                        });
+                        clickLogin();
+                    }}>로그인</button>
+                </form>
+
+
+
             </div>
-            <label>ID</label>
-            <input
-                type = "id"
-                placeholder="Enter username"
-                onChange={handleInputId}
-            />
-            <label>Password</label>
-            <input
-                type = "password"
-                placeholder="Enter password"
-                onChange={handleInputPw}
-            />
-            <button onClick={ async () => {
-                await axios.put('http://localhost:8080/api/player/login',{
-                    data:{
-                    "username":inputId,
-                    "password":inputPw
-                        }
-                },).then((res) => {
-                        console.log('로그인 정보 전송');
-                        setUser(res.data);
-                        setCookie('id',res.Authorization);
-                    });
-                clickLogin();
-            }}>로그인</button>
+
         </div>
     );
 };

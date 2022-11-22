@@ -11,7 +11,7 @@ const Game = () => {
                     <p onClick={() => {
                     }}>게임시작</p>
                 </Link>
-                <Link to="/logout">
+                <Link to="/main">
                     <p>로그아웃</p>
                 </Link>
             </div>
