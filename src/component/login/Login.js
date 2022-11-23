@@ -4,7 +4,6 @@ import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
 import styled from 'styled-components';
-import AuthContent from './AuthContent';
 
 const Login = () => {
     const [inputId,setInputId] = useState();
@@ -30,7 +29,7 @@ const Login = () => {
     return (
         <div className="loginBody">
             <div className="loginBody2">
-                <form className="loginForm">
+                <div className="loginForm">
                     <h1 className="header">로그인</h1>
                     <label className="loginLabel">ID</label>
                     <input className="loginInput"
@@ -61,7 +60,7 @@ const Login = () => {
                         });
                         clickLogin();
                     }}>로그인</button>
-                </form>
+                </div>
 
 
 

@@ -15,7 +15,8 @@ body{
 }
 .mainPage {
     position: absolute;
-    width: 100%;
+    width: 240px;
+    height:190px;
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
@@ -34,6 +35,7 @@ button:hover {
 }
 .mainPage a {
     text-decoration:none;
+
 }
 
 

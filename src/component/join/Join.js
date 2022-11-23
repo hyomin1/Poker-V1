@@ -18,23 +18,26 @@ const Join = () => {
     return (
         <div className="loginBody">
             <div className="loginBody2">
-                <form className="loginForm">
+                <div className="loginForm">
                     <h1 className="header">회원가입</h1>
                     <label className="loginLabel">ID</label>
                     <input className="loginInput"
                            type = "id"
-                           placeholder="Enter username"
+                           placeholder="아이디를 입력하세요"
                            onChange={onChangeId}
                     />
                     <label className="loginLabel">
                         Password</label>
                     <input className="loginInput"
                            type = "password"
-                           placeholder="Enter password"
+                           placeholder="비밀번호를 입력하세요"
                            onChange={onChangePasswd}
                     />
-                    <button  className="loginBtn" onClick={ () => {
-                        axios.post('https://ec2-15-164-231-78.ap-northeast-2.compute.amazonaws.com:8080/api/player', {
+                    <p className="goJoin" onClick={() => {
+                        navigate('/login');
+                    }}>이미 회원이신가요??</p>
+                    <button  className="loginBtn" onClick={ async () => {
+                        await axios.post('http://localhost:8080:8080/api/player', {
                             data: {
                                 "username":username,
                                 "password":password
@@ -51,10 +54,7 @@ const Join = () => {
                                 alert('이미 등록된 아이디 입니다.');
                         });
                     }}>회원가입완료</button>
-                </form>
-
-
-
+                </div>
             </div>
 
         </div>
