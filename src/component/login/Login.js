@@ -56,7 +56,7 @@ const Login = () => {
                         },).then((res) => {
                             console.log('로그인 정보 전송');
                             setUser(res.data);
-                            setCookie('id',res.Authorization);
+                            setCookie('id',res.data.data.id);
                         });
                         clickLogin();
                     }}>로그인</button>

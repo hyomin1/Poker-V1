@@ -1,19 +1,12 @@
 import React, {useState,useRef} from 'react';
 import './SixTable.css';
 import axios from "axios";
-import {useTimer} from 'use-timer';
+
 const SixTable = (props) => {
     const {images,setImage,cardImg,show,setShow,visible,setVisible,
         playerCard1,playerCard2,playerCard3,playerCard4,playerCard5,playerCard6,
         data,setData,reverseCard1,reverseCard2,betBtn1,betBtn2,betBtn3,phase3,phase4,phase5} = props;
-    const {time,start} = useTimer({
-        initialTime:10,
-        endTime : 0,
-        timerType: 'DECREMENTAL',
-        onTimeOver : () => {
-            alert('time is over');
-        }
-    });
+
     return (
         <div className="board">
             <div className="w2p1">
@@ -57,7 +50,6 @@ const SixTable = (props) => {
                 console.log('카드 데이터 요청');
                 reverseCard1(); //자기 카드1 뒤집기
                 reverseCard2(); //자기 카드2 뒤집기
-                start(); //타이머 함수임, 배팅버튼으로 옮김
             }}>게임시작</button>}
             {show&&cardImg()}
             <div className ="w2p2">
@@ -98,11 +90,7 @@ const SixTable = (props) => {
             {phase3()}
             {phase4()}
             {phase5()}
-            <button onClick={start}>Start</button>
-            <button>{time}</button>
-
-
-
+            <div id="chip"></div>
         </div>
     );
 };

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import SixTable from './SixTable';
 import axios from 'axios';
+import {useTimer} from 'use-timer';
 const StartSix = () => {
     const [images,setImages] = useState([
         {id :0, src: '/images/ace_of_spades.png'},
@@ -59,17 +60,24 @@ const StartSix = () => {
     const [show,setShow] = useState(false);
     const [visible,setVisible] = useState(true);
     const [data,setData] = useState();
-    useEffect(() => {
+    const {time,start} = useTimer({  //배팅 타이머
+        initialTime:10,
+        endTime : 0,
+        timerType: 'DECREMENTAL',
+        onTimeOver : () => {
+            alert('time is over');
+            document.getElementById("timer").style.display='none';
+        }
+    });
+    useEffect(() => {   //게임 입장시 데이터 받아오기
         axios.put('http://localhost:8080/api/board/gameStart/1',
         ).then(response => {
             setData(response.data);
             console.log(response.data);
-            phase = response.data.data.phaseNum;
-            console.log(phase);
         })
     },[]);
-
-    const cardImg = () => {
+    
+    const cardImg = () => {   //가운데 5장의 카드 세팅
         return (
             <div className="set2 pullDown">
                 <img id="rc2_1" className="c2" src ="/images/backimage.png"/>
@@ -146,34 +154,29 @@ const StartSix = () => {
     };
     const [rb,setRb] = useState(false);  //레이즈 금액 배팅 버튼
     const [rbr,setRbr] = useState(false); //레이즈 금액 배팅 버튼
-    const phase3 = () => {
+
+    const phase3 = () => {  //phase3 변경시 카드 3장 뒤집음 
         if(data&&data.data.phaseNum===3) {
             document.getElementById("rc2_1").src = images[data.data.card1].src;
             document.getElementById("rc2_2").src = images[data.data.card2].src;
             document.getElementById("rc2_3").src = images[data.data.card3].src;
         }
     };
-    const phase4 = () => {
+    const phase4 = () => { //phase4 변경시 카드 4장 뒤집음
         if(data&&data.phaseNum===4)
             document.getElementById("rc2_4").src = images[data.data.card4].src;
     };
-    const phase5 = () => {
+    const phase5 = () => { //phase5 변경시 카드 5장 뒤집음
         if(data&&data.phaseNum===5)
             document.getElementById("rc2_5").src = images[data.data.card5].src;
     };
-
-    let betPos;
-    let phase;
-    let cal;
-    let fold;
-    let bet;
-    const waitRequest = () => {
+    
+    const waitRequest = () => { //배팅한 player 대기하면서 요청
         axios.put('http://localhost:8080/api/board/1',{data:data.data});
     }
-    const timeOut = () => {
+    const timeOut = () => {  //3초간격으로 대기 요청하게
         setInterval(waitRequest,3000);
     }
-
     const rangeBet2= () => {
         return (
             <button id="rb2" onClick={() => {
@@ -187,11 +190,6 @@ const StartSix = () => {
                 axios.put('http://localhost:8080/api/board/raiseBetting',{
                     data:data.data //data.data로
                 }).then((response) => {
-                    bet = response.data.data.bet;
-                    betPos = response.data.data.betPos;
-                    phase = response.data.data.phaseNum;
-                    cal = response.data.data.player[response.data.data.betPos].cal;
-                    fold = response.data.data.player[response.data.data.betPos].fold;
                     console.log('레이즈데이터 전송!');
                     setData(response.data);
                     timeOut();
@@ -224,7 +222,6 @@ const StartSix = () => {
                         data:data.data //data.data로
                     }).then((response) => {
                         console.log('체크데이터 전송!');
-
                         setData(response.data);
                         timeOut();
                     });
@@ -267,11 +264,6 @@ const StartSix = () => {
                         data:data.data //data.data로
                     }).then((response) => {
                         console.log('체크데이터 전송!');
-                        bet = response.data.data.bet;
-                        betPos = response.data.data.betPos;
-                        phase = response.data.data.phaseNum;
-                        cal = response.data.data.player[response.data.data.betPos].cal;
-                        fold = response.data.data.player[response.data.data.betPos].fold;
                         setData(response.data);
                         timeOut();
                     });
@@ -301,7 +293,6 @@ const StartSix = () => {
                         data:data.data //data.data로
                     }).then((response) => {
                         console.log('폴드데이터 전송!');
-                       // response.data.data.player[response.data.data.betPos].fold = 1;
                         setData(response.data);
                         timeOut();
                     });
@@ -314,7 +305,6 @@ const StartSix = () => {
                         data:data.data
                     }).then((response) => {
                         console.log('올인!');
-                        //response.data.data.player[response.data.data.betPos].fold =2;
                         setData(response.data);
                         timeOut();
                     });
@@ -323,7 +313,6 @@ const StartSix = () => {
             </div>
         )
     }
-
     const foldInput = () => {
         return (
             <input type="text" value="폴드"/>
@@ -349,7 +338,6 @@ const StartSix = () => {
             <input type="text" value="체크"/>
         )
     }
-
     return (
         <div>
             <SixTable images={images} setImages={setImages} cardImg={cardImg}
@@ -359,8 +347,8 @@ const StartSix = () => {
                       reverseCard1={reverseCard1} reverseCard2={reverseCard2}
                       data={data} setData={setData} betBtn1={betBtn1} betBtn2={betBtn2} betBtn3={betBtn3}
                       phase3={phase3} phase4={phase4} phase5={phase5}
-
             />
+            <button id = "timer">{time}</button>
         </div>
     );
 };
