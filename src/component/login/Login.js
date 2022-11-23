@@ -18,14 +18,6 @@ const Login = () => {
         setInputPW(e.target.value);
     }
 
-    const clickLogin = () => {
-        if(!(user&&user.data!==null)) {
-            alert('로그인 완료!');
-            navigate("/game");
-        }
-        else
-            alert('로그인 실패!');
-    }
     return (
         <div className="loginBody">
             <div className="loginBody2">
@@ -57,13 +49,15 @@ const Login = () => {
                             console.log('로그인 정보 전송');
                             setUser(res.data);
                             setCookie('id',res.data.data.id);
+                            if(res.data.data.board===null) {
+                                alert('로그인 완료');
+                                navigate('/game');
+                            }
+                            else
+                                alert('이미 등록된 아이디 입니다.');
                         });
-                        clickLogin();
                     }}>로그인</button>
                 </div>
-
-
-
             </div>
 
         </div>

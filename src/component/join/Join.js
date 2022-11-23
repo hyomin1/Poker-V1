@@ -35,7 +35,7 @@ const Join = () => {
                     />
                     <p className="goJoin" onClick={() => {
                         navigate('/login');
-                    }}>이미 회원이신가요??</p>
+                    }}>이미 회원이신가요?</p>
                     <button  className="loginBtn" onClick={ async () => {
                         await axios.post('http://localhost:8080:8080/api/player', {
                             data: {
