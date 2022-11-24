@@ -5,7 +5,13 @@ import axios from "axios";
 const SixTable = (props) => {
     const {images,setImage,cardImg,show,setShow,visible,setVisible,
         playerCard1,playerCard2,playerCard3,playerCard4,playerCard5,playerCard6,
-        data,setData,reverseCard1,reverseCard2,betBtn1,betBtn2,betBtn3,phase3,phase4,phase5} = props;
+        data,setData,reverseCard1,reverseCard2,betBtn1,betBtn2,betBtn3,phase3,phase4,phase5,start,timer1,timer2,timer3,
+    timer4,timer5,timer6} = props;
+    const chips = () => {
+        return (
+            <div id="chip"></div>
+        )
+    }
 
     return (
         <div className="board">
@@ -13,6 +19,7 @@ const SixTable = (props) => {
                 <div className="g1">
                     <img className="gamerW2_1" src="/images/player1.png"/>
                     {show&&playerCard1()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[4].id)&&timer5()}
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[4].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[4].id)&&data.data.bet!=0&&
@@ -24,6 +31,7 @@ const SixTable = (props) => {
                 <div className="g2">
                     <img className="gamerW2_1" src="/images/player2.png"/>
                     {show&&playerCard2()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[3].id)&&timer4()}
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[3].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[3].id)&&data.data.bet!=0&&
@@ -35,6 +43,7 @@ const SixTable = (props) => {
                 <div className="g3">
                     <img className="gamerW2_1" src="/images/player3.png"/>
                     {show&&playerCard3()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[2].id)&&timer3()}
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[2].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[2].id)&&data.data.bet!=0&&
@@ -50,12 +59,14 @@ const SixTable = (props) => {
                 console.log('카드 데이터 요청');
                 reverseCard1(); //자기 카드1 뒤집기
                 reverseCard2(); //자기 카드2 뒤집기
+                start();
             }}>게임시작</button>}
             {show&&cardImg()}
             <div className ="w2p2">
                 <div className ="g4">
                     <img className="gamerW2_2" src="/images/player4.png"/>
                     {show&&playerCard4()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[5].id)&&timer6()}
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[5].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[5].id)&&data.data.bet!=0&&
@@ -67,6 +78,8 @@ const SixTable = (props) => {
                 <div className="g5">
                     <img className="gamerW2_2" src="/images/player5.png"/>
                     {show&&playerCard5()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&timer1()}
+
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&data.data.bet!=0&&
@@ -78,6 +91,7 @@ const SixTable = (props) => {
                 <div className="g6">
                     <img className="gamerW2_2" src="/images/player6.png"/>
                     {show&&playerCard6()}
+                    {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[0].id)&&timer2()}
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&data.data.bet==0&&betBtn1()}
 
                     {show&&data&&(data.data.player[data.data.betPos].id==data.data.player[1].id)&&data.data.bet!=0&&
@@ -90,7 +104,7 @@ const SixTable = (props) => {
             {phase3()}
             {phase4()}
             {phase5()}
-            <div id="chip"></div>
+
         </div>
     );
 };

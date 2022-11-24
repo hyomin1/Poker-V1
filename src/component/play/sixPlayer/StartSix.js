@@ -61,12 +61,13 @@ const StartSix = () => {
     const [visible,setVisible] = useState(true);
     const [data,setData] = useState();
     const {time,start} = useTimer({  //배팅 타이머
-        initialTime:10,
+        initialTime:15,
         endTime : 0,
         timerType: 'DECREMENTAL',
         onTimeOver : () => {
-            alert('time is over');
-            document.getElementById("timer").style.display='none';
+            alert('시간 초과');
+            deleteTimer();
+            //data.data.betPos++;
         }
     });
     useEffect(() => {   //게임 입장시 데이터 받아오기
@@ -76,7 +77,44 @@ const StartSix = () => {
             console.log(response.data);
         })
     },[]);
-    
+    const timer1 =() => { //player1 timer
+        return (
+            <button id = "timer1">{time}</button>
+        )
+    }
+    const timer2 =() => { //player2 timer
+        return (
+            <button id = "timer2">{time}</button>
+        )
+    }
+    const timer3 =() => { //player3 timer
+        return (
+            <button id = "timer3">{time}</button>
+        )
+    }
+    const timer4 =() => { //player4 timer
+        return (
+            <button id = "timer4">{time}</button>
+        )
+    }
+    const timer5 =() => { //player5 timer
+        return (
+            <button id = "timer5">{time}</button>
+        )
+    }
+    const timer6 =() => { //player6 timer
+        return (
+            <button id = "timer6">{time}</button>
+        )
+    }
+    const deleteTimer = () => {  //timer delete
+        document.getElementById("timer1").style.display='none';
+        document.getElementById("timer2").style.display='none';
+        document.getElementById("timer3").style.display='none';
+        document.getElementById("timer4").style.display='none';
+        document.getElementById("timer5").style.display='none';
+        document.getElementById("timer6").style.display='none';
+    }
     const cardImg = () => {   //가운데 5장의 카드 세팅
         return (
             <div className="set2 pullDown">
@@ -182,6 +220,7 @@ const StartSix = () => {
             <button id="rb2" onClick={() => {
                 document.getElementById("rb1").style.display='none';
                 document.getElementById("rb2").style.display='none';
+                deleteTimer();
                 //let call_cost = data.data.bet - data.data.player[data.data.betPos].cal;
                 data.data.player[data.data.betPos].cal += (data.data.bet - data.data.player[data.data.betPos].cal);
                 data.data.player[data.data.betPos].stack -= (data.data.bet - data.data.player[data.data.betPos].cal);
@@ -204,6 +243,7 @@ const StartSix = () => {
                     document.getElementById("f1").style.display='none';
                     document.getElementById("c1").style.display='none';
                     document.getElementById("r1").style.display='none';
+                    deleteTimer();
                     data.data.player[data.data.betPos].fold = 1;
                     axios.put('http://localhost:8080/api/board/foldBetting',{
                         data:data.data //data.data로
@@ -218,6 +258,7 @@ const StartSix = () => {
                     document.getElementById("f1").style.display='none';
                     document.getElementById("c1").style.display='none';
                     document.getElementById("r1").style.display='none';
+                    deleteTimer();
                     axios.put('http://localhost:8080/api/board/callBetting',{
                         data:data.data //data.data로
                     }).then((response) => {
@@ -246,6 +287,7 @@ const StartSix = () => {
                     document.getElementById("f2").style.display='none';
                     document.getElementById("c2").style.display='none';
                     document.getElementById("r2").style.display='none';
+                    deleteTimer();
                     data.data.player[data.data.betPos].fold = 1;
                     axios.put('http://localhost:8080/api/board/foldBetting',{
                         data:data.data //data.data로
@@ -260,6 +302,7 @@ const StartSix = () => {
                     document.getElementById("f2").style.display='none';
                     document.getElementById("c2").style.display='none';
                     document.getElementById("r2").style.display='none';
+                    deleteTimer();
                     axios.put('http://localhost:8080/api/board/callBetting',{
                         data:data.data //data.data로
                     }).then((response) => {
@@ -288,6 +331,7 @@ const StartSix = () => {
                     document.getElementById("f3").style.display='none';
                     document.getElementById("c3").style.display='none';
                     document.getElementById("r3").style.display='none';
+                    deleteTimer();
                     data.data.player[data.data.betPos].fold = 1;
                     axios.put('http://localhost:8080/api/board/foldBetting',{
                         data:data.data //data.data로
@@ -300,6 +344,7 @@ const StartSix = () => {
                 <button id="all" className ="allIn" onClick={() => {
                     document.getElementById("f3").style.display='none';
                     document.getElementById("all").style.display='none';
+                    deleteTimer();
                     data.data.player[data.data.betPos].fold = 2;
                     axios.put('http://localhost:8080/api/board/raiseBetting', {
                         data:data.data
@@ -346,9 +391,10 @@ const StartSix = () => {
                       playerCard4={playerCard4} playerCard5={playerCard5} playerCard6={playerCard6}
                       reverseCard1={reverseCard1} reverseCard2={reverseCard2}
                       data={data} setData={setData} betBtn1={betBtn1} betBtn2={betBtn2} betBtn3={betBtn3}
-                      phase3={phase3} phase4={phase4} phase5={phase5}
+                      phase3={phase3} phase4={phase4} phase5={phase5} timer1={timer1} timer2={timer2}
+                      timer3={timer3} timer4={timer4} timer5={timer5} timer6={timer6} start={start}
             />
-            <button id = "timer">{time}</button>
+
         </div>
     );
 };
