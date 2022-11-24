@@ -3,13 +3,13 @@ import './Login.css';
 import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
-import styled from 'styled-components';
+
 
 const Login = () => {
     const [inputId,setInputId] = useState();
     const [inputPw,setInputPW] = useState();
     const [user,setUser] = useState();
-    const [cookies,setCookie] = useCookies(['id']);
+    const [cookies,setCookie] = useCookies();
     const navigate = useNavigate();
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -49,12 +49,12 @@ const Login = () => {
                             console.log('로그인 정보 전송');
                             setUser(res.data);
                             setCookie('id',res.data.data.id);
-                            if(res.data.data.board===null) {
+                            if((res.data.data.username===inputId)&&(res.data.data.password===inputPw)) {
                                 alert('로그인 완료');
                                 navigate('/game');
                             }
                             else
-                                alert('이미 등록된 아이디 입니다.');
+                                alert('아이디와 비밀번호를 다시 입력해주세요');
                         });
                     }}>로그인</button>
                 </div>
