@@ -22,7 +22,6 @@ function App() {
                   <Route path = "/free" exact = {true} element ={<StartTwo/>}/>
                 <Route path = "/six" exact ={true} element = {<StartSix/>}/>
                 <Route path = "/wait" exact={true} element = {<Wait/>}/>
-
             </Routes>
     </CookiesProvider>
 

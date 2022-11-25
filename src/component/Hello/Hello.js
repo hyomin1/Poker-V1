@@ -7,7 +7,7 @@ const Hello = () => {
     return (
         <body>
             <div className="back">
-                <video className="helloVideo" src ="/videos/casino.mp4" muted autoPlay loop/>
+                <video className="helloVideo" src ="/videos/casino.mp4" muted autoPlay playsInline loop/>
                 <Link to ="/main">
                     <div className="text">
                         <p className="pulse">

@@ -6,13 +6,14 @@ body{
 .background {
     margin: 0px ;
     position: relative;
-
 }
+
 .mainVideo {
     width: 100%;
     height: 100vh;
     object-fit: cover;
 }
+
 .mainPage {
     position: absolute;
     width: 240px;
@@ -35,7 +36,6 @@ button:hover {
 }
 .mainPage a {
     text-decoration:none;
-
 }
 
 

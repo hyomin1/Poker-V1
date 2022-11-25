@@ -4,7 +4,6 @@ import {Link,useNavigate} from "react-router-dom";
 import axios from 'axios';
 import {useCookies} from 'react-cookie';
 
-
 const Login = () => {
     const [inputId,setInputId] = useState();
     const [inputPw,setInputPW] = useState();
@@ -26,15 +25,17 @@ const Login = () => {
                     <label className="loginLabel">ID</label>
                     <input className="loginInput"
                            type = "id"
-                           placeholder="Enter username"
+                           placeholder="아이디를 입력하세요"
                            onChange={handleInputId}
+                           maxLength="10"
                     />
                     <label className="loginLabel">
                         Password</label>
                     <input className="loginInput"
                            type = "password"
-                           placeholder="Enter password"
+                           placeholder="비밀번호를 입력하세요"
                            onChange={handleInputPw}
+                           maxLength="10"
                     />
                     <p className="goJoin" onClick={() => {
                         navigate('/join');

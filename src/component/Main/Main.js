@@ -13,7 +13,7 @@ const Main = () => {
         return (
 
             <div className="background">
-                <video className="mainVideo" src="/videos/card.mp4" muted autoPlay loop/>
+                <video className="mainVideo" src="/videos/card.mp4" muted autoPlay playsInline loop/>
                 <div className="mainPage">
                     <Link to="/join">
                         <p>회원가입</p>
