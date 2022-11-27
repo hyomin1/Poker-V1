@@ -8,7 +8,7 @@ const Login = () => {
     const [inputId,setInputId] = useState();
     const [inputPw,setInputPW] = useState();
     const [user,setUser] = useState();
-    const [cookies,setCookie] = useCookies();
+    const [cookies,setCookie,getCookie] = useCookies();
     const navigate = useNavigate();
     const handleInputId = (e) => {
         setInputId(e.target.value);
@@ -49,7 +49,7 @@ const Login = () => {
                         },).then((res) => {
                             console.log('로그인 정보 전송');
                             setUser(res.data);
-                            setCookie('id',res.data.data.id);
+                            setCookie('playerId',res.data.data.id);
                             if((res.data.data.username===inputId)&&(res.data.data.password===inputPw)) {
                                 alert('로그인 완료');
                                 navigate('/game');

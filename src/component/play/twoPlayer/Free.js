@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import axios from 'axios';
 import {useNavigate} from 'react-router';
 import StartTwo from './StartTwo';
-import Betting from './Betting';
+
 
 const Free = (props) => {
     const {show,setShow,visible,setVisible,cardImg,playerCard1,playerCard2,data,setData
